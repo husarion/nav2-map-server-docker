@@ -10,4 +10,6 @@ RUN apt update && apt upgrade -y && apt install -y \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN echo $(dpkg -s ros-$ROS_DISTRO-nav2-map-server | grep 'Version' | sed -r 's/Version:\s([0-9]+.[0-9]+.[0-9]+).*/\1/g') >> /version.txt
+
 RUN echo "source /opt/ros/$ROS_DISTRO/setup.bash" >> ~/.bashrc
